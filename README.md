@@ -1,115 +1,114 @@
-# AI Editorial CMS Mockup
+# Post Editor CMS — Frontend & AI Editorial Suite
 
-Một mock UI cho hệ thống editor nội dung AI đa ngôn ngữ, tập trung vào trải nghiệm viết bài, review, dịch thuật và quản lý cover image trong một CMS hiện đại.
+Một hệ thống Editor bài viết kỹ thuật và CMS truyền thông đa ngôn ngữ, tích hợp AI Copilot, Slash Commands, Rich Text Formatting và dịch thuật thời gian thực.
 
-## Mục tiêu dự án
+---
 
-Dự án này là một giao diện frontend dạng prototype để mô phỏng một editor bài viết chuyên nghiệp cho nền tảng AI content, gồm:
+## 🚀 Tính năng nổi bật
 
-- sidebar outline
-- editor nội dung chính
-- panel cài đặt bài viết
-- menu AI Assistant
-- slash commands
-- modal dịch thuật đa ngôn ngữ
-- cover image upload + crop
-- responsive layout cho desktop/tablet/mobile
+- **Editor Soạn Thảo Rich Text Chuyên Nghiệp**:
+  - Hỗ trợ gõ trực tiếp trong vùng bài viết (`contenteditable`).
+  - Thanh công cụ định dạng `editor-toolbar`: Bold (`B`), Italic (`I`), Strikethrough (`U`), Link, Code block, Comment highlight.
+  - Tự động đồng bộ Tiêu đề bài viết (`v-model`) với thanh Topbar Header.
 
-## Tính năng hiện có
+- **Slash Commands (`/`) Menu**:
+  - Menu chèn khối nội dung nhanh bằng phím tắt `/` hoặc nút `/` trên thanh công cụ.
+  - **Basic Blocks**: Paragraph, Heading 1/2/3, Bullet List, Numbered List, Checklist, Quote, Divider (`---`).
+  - **Media & Files**: Image (URL / crop), Video embed, File attachments, Embed widget.
+  - **AI & Technical Blocks**: Code Block syntax, Prompt Card, Model Comparison Table, Callout blocks (Info/Warning), Math formulas ($E=mc^2$).
 
-- Giao diện CMS sáng tạo, theo phong cách premium editorial
-- Chế độ viết bài với title, subtitle, các khối nội dung và bảng so sánh
-- AI menu với các action như: improve writing, summarize, explain, generate example
-- Slash command menu cho block insertion
-- Translation modal hỗ trợ EN / VI / KO
-- Cover upload và crop tương tác
-- Zoom và kéo ảnh trong crop modal
-- Export ảnh crop sang định dạng WebP
-- Layout responsive cho các độ rộng phổ biến
+- **AI Copilot ("✨ AI") & Backend Gateway Integration**:
+  - Tích hợp AI Gateway backend chạy NodeJS + Fastify + TypeScript (port `3001`).
+  - Hỗ trợ **Mock LLM Adapter** (dùng ngay không cần Ollama) và **Ollama LLM Adapter** (`qwen2.5:7b`).
+  - Toast thông báo trạng thái AI realtime ở góc phải màn hình.
 
-## Công nghệ sử dụng
+- **Dịch thuật Đa Ngôn Ngữ (Translation Suite)**:
+  - Hỗ trợ dịch đồng thời bài viết sang Tiếng Việt (🇻🇳) và Tiếng Hàn (🇰🇷).
+  - Kết nối SSE Stream theo dõi tiến độ dịch chi tiết cho từng ngôn ngữ.
+  - Chế độ Review & Diff bài viết trước khi xuất bản.
 
-- Vue 3
-- TypeScript
-- Vite
-- CSS modules / scoped CSS
+---
 
-## Cấu trúc thư mục chính
+## 💡 Hướng dẫn sử dụng chi tiết
+
+### 1. Cách sử dụng Slash Commands (`/`)
+1. **Mở menu**:
+   - Nhấp vào nút **`/`** trên thanh công cụ `editor-toolbar`.
+   - Hoặc gõ phím `/` trong vùng nội dung bài viết.
+2. **Chọn loại khối nội dung**:
+   - **Thêm tiêu đề**: Chọn `Heading 1`, `Heading 2`, `Heading 3` để tự động tạo heading và cập nhật cây **Outline** bên trái.
+   - **Danh sách công việc**: Chọn `Checklist` để tạo danh sách checkbox tương tác.
+   - **Chèn khối kỹ thuật**:
+     - `Code Block`: Chèn khung mã nguồn định dạng sẵn.
+     - `Prompt`: Chèn thẻ System/User Prompt chuyên dụng cho các bài viết AI Engineering.
+     - `Model Comparison`: Chèn bảng so sánh hiệu năng các mô hình AI (Latency, Accuracy score).
+     - `Callout`: Chèn hộp ghi chú nổi bật (Gợi ý/Cảnh báo).
+     - `Math`: Chèn công thức toán học.
+   - **Chèn Media**: Chọn `Image` hoặc `Video` để nhập URL xem trước trực tiếp.
+
+### 2. Cách sử dụng nút AI Assistant ("✨ AI")
+1. **Mở menu AI Copilot**:
+   - Nhấp vào nút **`✨ AI`** màu tím/xanh nổi bật trên `editor-toolbar`.
+2. **Xử lý đoạn văn bản được bôi đen (Selection Scope)**:
+   - **Bôi đen 1 câu/đoạn văn** bất kỳ trong bài viết -> bấm `✨ AI` -> chọn tác vụ:
+     - **`Improve writing` / `Make clearer`**: Tối ưu văn phong, làm rõ ý diễn đạt.
+     - **`Make shorter` / `Make longer`**: Tóm gọn hoặc mở rộng đoạn văn.
+     - **`Fix grammar`**: Sửa lỗi chính tả và ngữ pháp.
+     - **`Change tone`**: Thay đổi giọng văn bài viết.
+     - **`Explain`**: Giải thích khái niệm kỹ thuật trong văn bản.
+     - **`Generate code` / `Generate example`**: Tự động sinh mã nguồn hoặc ví dụ minh họa liên quan.
+   - *Kết quả*: AI sẽ tự động thay thế (replace) văn bản đã chọn bằng phiên bản AI viết lại, kèm toast thông báo hoàn tất.
+3. **Xử lý toàn bài / Tạo nội dung mới (Article Scope)**:
+   - Khi **không bôi đen văn bản** -> bấm `✨ AI` -> chọn tác vụ (ví dụ: `Summarize` hoặc `Generate example`):
+   - *Kết quả*: AI sẽ tự động chèn một khối gợi ý AI chuyên nghiệp (`✨ AI (Summarize): ...`) ngay trong nội dung bài viết.
+4. **Dịch thuật nhanh**:
+   - Chọn mục **`Translate`** trong menu AI để mở bảng điều khiển dịch thuật đa ngôn ngữ.
+
+---
+
+## 🛠️ Cài đặt & Chạy ứng dụng
+
+### Yêu cầu môi trường
+- Node.js >= 22.18
+- npm
+
+### 1. Khởi chạy Frontend (Vue 3 Dev Server)
+```bash
+npm install
+npm run dev
+```
+Ứng dụng sẽ chạy tại: `http://localhost:5173` (Vite dev server đã được cấu hình proxy `/api` tự động chuyển tiếp tới Backend ở port 3001).
+
+### 2. Khởi chạy Backend AI Gateway (Node.js + Fastify)
+```bash
+cd server
+npm install
+npm run dev
+```
+Backend AI Gateway sẽ khởi tạo tại `http://localhost:3001`.
+
+---
+
+## 📁 Cấu trúc dự án
 
 ```text
 post-editor/
-├─ docs/
-│  ├─ ai-button/
-│  ├─ 04-OLLAMA-LLM-SETUP.md
-│  └─ ...
-├─ public/
-├─ src/
-│  ├─ assets/
-│  ├─ App.vue
-│  ├─ main.ts
-│  └─ ...
-├─ .gitignore
-├─ index.html
-├─ package.json
-├─ tsconfig.json
-├─ vite.config.ts
-├─ README.md
-└─ package-lock.json
+├── server/                     # Backend AI Gateway (Node.js + Fastify)
+│   ├── src/
+│   │   ├── adapters/           # LLM Adapters (MockAdapter, OllamaAdapter)
+│   │   ├── ai/                 # Task Registry, Prompt Manager, Editorial Profile
+│   │   ├── routes/             # POST /api/ai/run, POST /api/ai/translate
+│   │   ├── schemas/            # Zod validation schemas
+│   │   ├── config.ts
+│   │   └── index.ts
+│   ├── README.md               # Document chi tiết Backend
+│   └── package.json
+├── src/                        # Frontend Vue 3 App
+│   ├── components/             # TranslateDialog, TranslationReview, TagInput
+│   ├── services/               # ai.ts (API Client cho AI Gateway & SSE streaming)
+│   ├── App.vue                 # Core Editor App UI & Handlers
+│   └── main.ts
+├── docs/                       # Tài liệu thiết kế & AI Specifications
+├── vite.config.ts              # Proxy config /api -> localhost:3001
+└── README.md
 ```
-
-## Yêu cầu môi trường
-
-- Node.js >= 22.18 hoặc >= 24.12
-- npm
-
-## Cài đặt
-
-```bash
-npm install
-```
-
-## Chạy dự án ở chế độ dev
-
-```bash
-npm run dev -- --host 0.0.0.0
-```
-
-Mặc định Vite sẽ chạy trên localhost, ví dụ:
-
-- http://localhost:5173/
-- hoặc port khác nếu port 5173 đang bận
-
-## Build production
-
-```bash
-npm run build
-```
-
-## Preview production build
-
-```bash
-npm run preview -- --host 0.0.0.0
-```
-
-## Lưu ý thiết kế
-
-Dự án hiện là một prototype frontend, không có backend thật, không tích hợp API AI thực tế, không lưu dữ liệu xuống database. Mục tiêu là kiểm chứng UX/editorial trải nghiệm trước khi triển khai phần backend và AI Gateway.
-
-## Roadmap gợi ý
-
-- tích hợp Tiptap editor thực tế
-- thêm AI Gateway / backend service
-- tích hợp Ollama hoặc mô hình local
-- thêm streaming response
-- hỗ trợ review, diff và apply content
-- thêm export / publish flow
-- quản lý article và revision history
-
-## Tài liệu liên quan
-
-- [docs/ai-button/00-AI-COPILOT-IMPLEMENTATION-PLAN.md](docs/ai-button/00-AI-COPILOT-IMPLEMENTATION-PLAN.md)
-- [docs/04-OLLAMA-LLM-SETUP.md](docs/04-OLLAMA-LLM-SETUP.md)
-
-## Ghi chú
-
-Dự án hiện tập trung vào UX của một CMS AI editorial và mockup editor, phù hợp để demo giao diện, kế hoạch kiến trúc và thử nghiệm layout trước khi triển khai hệ thống đầy đủ.
